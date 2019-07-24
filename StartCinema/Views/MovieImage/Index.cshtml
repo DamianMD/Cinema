@@ -1,0 +1,25 @@
+﻿@model StartCinema.ViewModel.MovieImageViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<main class="main-content">
+    <div class="container">
+        <h2>Create Movie Image</h2>
+
+        @using (Html.BeginForm("Index", "MovieImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageFile, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.ImageFile, new { @class = "form-control-file", @placeholder = "Format Type", @type = "file", @accept = "image/*" })
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Add</button>
+            </div>
+        }
+
+    </div>
+
+</main>
+
+

@@ -1,0 +1,62 @@
+﻿@model StartCinema.ViewModel.ReserveViewModel
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h1>Rezervare biletelor</h1>
+
+
+<form action="@Url.Action("Create","Booking")"/>
+<div id="container">
+
+    @foreach (var item in Model.RowSeat)
+    {
+
+        <button type="button" class="btn  btn-seat" 
+                @(@item.BookingId != null ? "style=background-color:orangered;" : string.Empty) data-id="@item.Id" data-row="@item.RowSeat.RowNumber" @(item.BookingId != null ? "disabled" : string.Empty)>@item.RowSeat.SeatNumber</button>
+        if (item.RowSeat.SeatNumber.Equals(10))
+        {
+            <br />
+        }
+    }
+    @Html.HiddenFor(x => x.Rows, new { @id = "rowsList" })
+    @Html.HiddenFor(x => x.Columns, new { @id = "columnList" })
+</div>
+
+
+
+
+    <h3 id="selectedSeats">Selected Seats:</h3>
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<br/>
+
+<input type="submit" value="Next Step" id="submitBtn">
+
+
+
+<script>
+        $(".btn-seat").click(function () {
+            $(this).toggleClass("active");
+
+            var btn = $("#container").find(".active");
+            var text = 'Selected Seats:';
+            var rowList = [];
+            var columnList = [];
+            btn.each(function (index, value) {
+                text += $(value).data("row") + '/' + $(value).text() + "; ";
+                rowList.push($(value).data("row").toString());
+                columnList.push($(value).text());
+            });
+            console.log(rowList);
+            console.log(columnList);
+
+            $("#rowsList").val(rowList);
+            $("#columnList").val(columnList);
+            $("#selectedSeats").text(text)
+        });
+    </script>
+
+   
+
+
+
+

@@ -1,0 +1,76 @@
+﻿@model StartCinema.Models.Booking
+
+<div>
+    <h4>Booking Successful </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookingMadeDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookingMadeDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cola)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cola)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Popcorn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Popcorn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeatCount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>

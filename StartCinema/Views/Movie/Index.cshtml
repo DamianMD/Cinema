@@ -1,0 +1,97 @@
+﻿@*@model IEnumerable<StartCinema.Models.Movie>*@
+@model PagedList.IPagedList<StartCinema.Models.Movie>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Movie", FormMethod.Get))
+{
+   
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Movie Title", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+         Movie Country
+        </th>
+        <th>
+         Duration
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            @Html.ActionLink("Rating", "Index", new { sortOrder = ViewBag.RatingSortParm })
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+           Genre
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfMovie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            @if(User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MovieId })
+                    </td>
+                }
+            }
+        </tr>
+    }
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

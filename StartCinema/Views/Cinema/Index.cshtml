@@ -1,0 +1,73 @@
+﻿@model IEnumerable<StartCinema.Models.Cinema>
+
+@{
+    ViewBag.Title = "Cinema Details";
+}
+
+<h2>Index</h2>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
+
+    <table class="table">
+    <tr>
+        <th>
+            Cinema Name
+        </th>
+        <th>
+            Manager
+        </th>
+        <th>
+            Adress
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Seat Capacity
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CinemaName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CinemaManager)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CinemaAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CinemaPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CinemaSeatCapacity)
+        </td>
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+            @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+            @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+        </td>
+    }
+}
+    
+    </tr>
+}
+
+</table>
